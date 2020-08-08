@@ -17,4 +17,4 @@ jobs:
           token: ${{ secrets.OCTOPRINT_DOCKER_DISPATCH_TOKEN }}
           repository: HackerHappyHour/tagging-strategy
           event-type: 'release'
-          client-payload: '{"tag_name": ${{ toJSON(github.event) }}}'
+          client-payload: '{"tag_name": "${{ github.event.release.tag_name }}"}'
