@@ -1,0 +1,20 @@
+name: Dispatcher
+
+on:
+  release:
+    types: [published, prereleased, released]
+
+jobs:
+
+  dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: dispatch
+        id: dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.OCTOPRINT_DOCKER_DISPATCH_TOKEN }}
+          repository: HackerHappyHour/tagging-strategy
+          event-type: 'release'
+          client-payload: '{"github": ${{ toJson(github) }}}'
